@@ -13,12 +13,9 @@ ifLH=0; % 1 if H1 and H2 are in GSN convention, H2 90 degress clockwise from H1.
 ch1=[chz(1),'H1'];
 ch2=[chz(1),'H2'];
 
-%datadir='/Volumes/Work/Lau_research/OBS_data/';
-% ------------directory of SAC data-------------------
-%datadir='/Volumes/LauData_YangZha/WHO-antelope/WHO-STAID/';
+
 rootdir=pwd;
 
-%datadir='/Volumes/Work/Lau_research/orientation/tool/test_data/'
 datadir=[rootdir,'/test_data/'];
 
 
@@ -27,17 +24,10 @@ datadir=[rootdir,'/test_data/'];
 % STATIONS TO CALCULATE ORIENTATION FOR
 % THE SECOND ONE IS "STATIONLIST": STATIONS TO SERVE AS VIRTUAL SOURCES 
 % WE LOOP THROUGH BOTH
-
-%centerstalist= '/Volumes/Work/Lau_research/orientation/ccf/stationlist_whoi.dat'
-% stations to calculate ccf with each center station as virtural sources
-%stationlist = '/Volumes/Work/Lau_research/orientation/ccf/stationlist_whoi.dat'
-%centerstalist= '/Volumes/Work/Lau_research/orientation/tool/testlist.dat';
 centerstalist= [rootdir,'/testlist.dat'];
-% 
-%stationlist = '/Volumes/Work/Lau_research/orientation/ccf/stationlist_all.dat'
-%stationlist= '/Volumes/Work/Lau_research//orientation/tool/testlist.dat';
+
+
 stationlist= [rootdir,'/testlist.dat'];
-%stationlist = '/Volumes/Work/Lau_research/orientation/ccf/twostation.dat'
 
 v_sta0=textread(centerstalist,'%s');
 v_sta=textread(stationlist,'%s');
@@ -46,7 +36,6 @@ v_sta=textread(stationlist,'%s');
 %% settings for calculating cross-term correlations
 
 % ------------root directory to storing CCF------------
-%ccfdir='/Volumes/Work/Lau_research/orientation/tool/testccf/';
 ccfdir=[rootdir,'/testccf/'];
 % specify the largest station distances in the network
 maxdist=500;

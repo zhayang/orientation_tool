@@ -38,6 +38,9 @@ Updated 11/28/2014
 
 - adding option ifLH to use Left handed (GSN convention) or right handed system.
 
+Updated 11/07/2015:
+
+- created github repository
 
 Yang Zha
 yangz@ldeo.columbia.edu
