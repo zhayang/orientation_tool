@@ -1,12 +1,18 @@
-11/29/2014
+12/13/2015
 Readme for OBS orientation tool using ambient noise correlation
 
-This tool read in daily 3 components (Z, H1, H2) SAC files and estimate sensor orientations using a ambient noise based method, described in Zha, Webb and Menke, 2013(GRL) (doi:10.1002/grl.50698). 
+This tool analyzes 3 component (Z, H1, H2)  OBS data in SAC format and estimate sensor orientations using a ambient noise based method, described in Zha, Webb and Menke, 2013(GRL) (doi:10.1002/grl.50698). 
 
-The resulting orientations follows GSN convention (Left-Handed system). See http://www.obsip.org/experiments/experiment-list/2011/cascadia/cascadia-data-restriction-and-reupload-information/
+The resulting orientations follows GSN convention (Left-Handed system). See http://www.obsip.org/experiments/experiment-list/2011/cascadia/cascadia-data-restriction-and-reupload-information/. Calculated orientation angle is the angle from North CLOCKWISE to H1. 
 
+You will need Matlab Mapping toolbox to run this code.
 
 There are 3 steps.
+1) Modify Settings.
+2) Calculate cross-correlation functions (CCF).
+3) Estimating orientation angle from CCF.
+
+Details of each step: 
 
 1) Setting up the data directories and stations lists and number of days...etc. This is done by the script "setting_tool.m"
 if everything is right, this file is the only one you need to edit.  You should first add the directory "lib" and its sub-directories to the Matlab path.
@@ -19,7 +25,7 @@ NOTE: the preferred data storage structure is: station/year/day/*SAC. This is th
 
 
 
-Step 2) is the most time consuming part, but it only need to be run once. You may want to run step 3 many times with various parameters such as SNR criteria, frequency band and different target stations. 
+Step 2 is the most time consuming part, but it only need to be run once. You may want to run step 3 many times with various parameters such as SNR criteria, frequency band and different target stations. 
 
 The package has a sample dataset in "test_data", which contains 3 component SAC data on 6 stations, for 10 days.  
 
@@ -30,18 +36,21 @@ The testlist.dat file contains the station names used in calculating cross-corre
 The "setting_tool.m" script in the package works with the data. You will need to change the root directory in the script to wherever you put it in. 
 
 
-Questions please contact Yang Zha: yangz@ldeo.columbia.edu
+Questions please contact Yang Zha: yangz@ldeo.columbia.edu OR branden.zha@gmail.com
 
+
+
+
+Updated 11/07/2015:
+
+- created github repository
 
 Updated 11/28/2014
 - adding seed2sac code for extracting SAC file from SEED and miniSEED FILES
 
 - adding option ifLH to use Left handed (GSN convention) or right handed system.
 
-Updated 11/07/2015:
-
-- created github repository
-
 Yang Zha
+Lamont Doherty Earth Observatory, Columbia University
 yangz@ldeo.columbia.edu
 

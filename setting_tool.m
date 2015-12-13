@@ -59,9 +59,9 @@ cmax=5.0;
 cmin=2.5;
 % station to calculate orientation for
 
-sta1 = 'A02W';
+sta1 = 'A10W';
 % -----QC parameters------------
-C_cutoff=0.5;
+C_cutoff=0.0;
 S_cutoff=0.;
 SNR_cutoff=2;
 
