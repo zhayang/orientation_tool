@@ -1,33 +1,39 @@
 12/13/2015
 Readme for OBS orientation tool using ambient noise correlation
 
+--------Overview-------------
 This tool analyzes 3 component (Z, H1, H2)  OBS data in SAC format and estimate sensor orientations using a ambient noise based method, described in Zha, Webb and Menke, 2013(GRL) (doi:10.1002/grl.50698). 
 
-The resulting orientations follows GSN convention (Left-Handed system). See http://www.obsip.org/experiments/experiment-list/2011/cascadia/cascadia-data-restriction-and-reupload-information/. Calculated orientation angle is the angle from North CLOCKWISE to H1. 
+The resulting orientations follows GSN convention (Left-Handed system). See http://www.obsip.org/experiments/experiment-list/2011/cascadia/cascadia-data-restriction-and-reupload-information/. 
 
-You will need Matlab Mapping toolbox to run this code.
+Calculated orientation angle is the angle from North CLOCKWISE to H1. 
 
+----Required software----------
+You will need Matlab and the Mapping toolbox to run this code.
+
+
+-------How to use---------------
 There are 3 steps.
 1) Modify Settings.
 2) Calculate cross-correlation functions (CCF).
 3) Estimating orientation angle from CCF.
 
-Details of each step: 
+--------Details of each step------: 
 
 1) Setting up the data directories and stations lists and number of days...etc. This is done by the script "setting_tool.m"
-if everything is right, this file is the only one you need to edit.  You should first add the directory "lib" and its sub-directories to the Matlab path.
+if everything is right, this file is the ONLY one you need to edit.  You should first add the directory "lib" and its sub-directories to the Matlab path.
 
 NOTE: the preferred data storage structure is: station/year/day/*SAC. This is the way that ccf_crossterm_general.m recognizes. A Bash shell script named seed2sac.sh is included in this package. It uses rdseed to extract data from a single SEED file and generate daily SAC files organized in the above fashion.  
 
-2) Calculate 3C cross-correlation functions using "ccf_crossterm_general.m". For the target station A, and all other stations in the list, calculate Czz,C1z,C2z. In this step you will need the both vertical components and the H1 and H2 component for target station A. You may need to make sure the station time axis are synchronized.
+2) Calculate 3C cross-correlation functions using "ccf_crossterm_general.m". For the target station(namly station A), and all other stations in the list, calculate Czz,C1z,C2z. In this step you will need both the vertical components and the H1 and H2 component for target station A. You may need to make sure the station time axis are synchronized.
 
 3)Read in the cross-correlations and estimate the sensor orientation for ONE target station, using " calc_orientation_array_general.m" . It also does some quality control filtering to remove outliers and noisy measurements. A final mean orientation and uncertainty is given. To calculate the orientation angle of all stations, simply loop through all stations. 
 
 
-
 Step 2 is the most time consuming part, but it only need to be run once. You may want to run step 3 many times with various parameters such as SNR criteria, frequency band and different target stations. 
 
-The package has a sample dataset in "test_data", which contains 3 component SAC data on 6 stations, for 10 days.  
+------------Sample dataset-----------
+It is recommended that you test the code on the provided sample data to make sure the code works(nothing is missing). The package has a sample dataset in "test_data", which contains 3 component SAC data on 6 stations, for 10 days.  
 
 The package also has a "test_ccf" folder, which contains cross-correlation functions for select data, stacked for select days.  You don't need the test_ccf folder to calculate orientations, since it will be generated from the data if you run "ccf_crossterm_general.m".
 
