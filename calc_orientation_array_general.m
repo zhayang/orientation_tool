@@ -16,8 +16,8 @@
 %% -------------------station settings-------------------
 clear
  dir0=pwd;
-  path_save=path;
-  rmpath([matlabroot '/toolbox/map/map/'])
+%  path_save=path;
+%  rmpath([matlabroot '/toolbox/map/map/'])
 % dt=1;
 % %ifQC=0;
 % polarity=1; % for z data ,1 if up is positive, -1 if down is positive;
@@ -534,6 +534,6 @@ if(ifsave)
     save orientation.mat sta1 vpair ray phi_temp phi phi_mean std_mean SNR_R SNR_Z SNR_cutoff C_cutoff vec_C
 end
 
-path(path_save);
+%path(path_save);
 cd(dir0)
     % 	end

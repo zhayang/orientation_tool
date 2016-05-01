@@ -14,8 +14,8 @@
 %% ------------------- settings-------------------
 clear
 %
- path_save=path;
- rmpath([matlabroot '/toolbox/map/map/']);
+% path_save=path;
+% rmpath([matlabroot '/toolbox/map/map/']);
  
 dir0=pwd;
 % % Specify the sampling rate of the input data
@@ -380,7 +380,7 @@ for ista1=1:nsta1
     
     
 end
-path(path_save)
+%path(path_save)
 cd(dir0)
 
 
