@@ -14,6 +14,9 @@
 %% ------------------- settings-------------------
 clear
 %
+ path_save=path;
+ rmpath([matlabroot '/toolbox/map/map/']);
+ 
 dir0=pwd;
 % % Specify the sampling rate of the input data
 % dt=1.0;
@@ -237,9 +240,15 @@ for ista1=1:nsta1
                     %                     lon2=-lon2;
                     %                 end
                     %
-                    [delta,az]=distance(lat1,lon1,lat2,lon2);
-                    [delta,baz]=distance(lat2,lon2,lat1,lon1);
                     
+                    % use home made distance code independent from mapping
+                    % toolbox
+                    
+                    [delta,az]=coord2dist(lat1,lon1,lat2,lon2);
+                    [delta,baz]=coord2dist(lat2,lon2,lat1,lon1);
+                    
+%                       [delta,az]=distance(lat1,lon1,lat2,lon2);
+%                     [delta,baz]=distance(lat2,lon2,lat1,lon1);
                     dist=delta*6371*pi/180;
                     
                     Delta=S1.DELTA;
@@ -371,6 +380,7 @@ for ista1=1:nsta1
     
     
 end
+path(path_save)
 cd(dir0)
 
 

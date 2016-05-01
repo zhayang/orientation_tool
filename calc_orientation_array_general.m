@@ -16,6 +16,8 @@
 %% -------------------station settings-------------------
 clear
  dir0=pwd;
+  path_save=path;
+  rmpath([matlabroot '/toolbox/map/map/'])
 % dt=1;
 % %ifQC=0;
 % polarity=1; % for z data ,1 if up is positive, -1 if down is positive;
@@ -84,7 +86,9 @@ for ip=1:length(vpair)
     lon2=lon2_vec(ip);
     dep2=dep2_vec(ip);
     
-    [delta,az]=distance(lat1,lon1,lat2,lon2);
+       [delta,az]=coord2dist(lat1,lon1,lat2,lon2);
+
+%     [delta,az]=distance(lat1,lon1,lat2,lon2);
     dist=delta*6371*pi/180;
     
     %	if(dist<120)
@@ -495,41 +499,41 @@ if(plot_QC)
 end
 
 
-%------------plot coverage map-----------------------
-if(plot_coverage)
-    
-    
-   % latlim=[-22 -18]; lonlim=[-178 -174];
-     latlim=[min([ray(:,1);ray(:,3)]-1) max([ray(:,1);ray(:,3)])+1]; 
-     lonlim=[min([ray(:,2);ray(:,4)]-1) max([ray(:,2);ray(:,4)])+1];
-    figure;hold on
-    h=worldmap(latlim,lonlim);
-    %	h=worldmap('world');
-    
-    
-    
-    for ip=1:length(vpair)
-        h1=plotm([ray(ip,1) ray(ip,3)],[ray(ip,2) ray(ip,4)],'-ko','linewidth',1,'markerfacecolor','k');
-    end
-    set(h1,'markerfacecolor','k')
-    for ip=1:length(ind_pair)
-        h2=plotm([ray(ind_pair(ip),1) ray(ind_pair(ip),3)],[ray(ind_pair(ip),2) ray(ind_pair(ip),4)],'-ro','linewidth',1,'markerfacecolor','r');
-    end
-    
-    
-    l1=legend([h1,h2],'All inter-station raypath','Used raypath');
-    set(l1,'fontsize',15);
-    textm(lat1-0.2,lon1-0.7,sta1,'fontsize',15,'color','k');
-    geoshow(lat1,lon1,'color','b','marker','^','markersize',12,'markerfacecolor','b');
-    
-    axesm(gcm,'fontsize',15);
-    axesm(gcm,'fedgecolor','none');
-end
+%------------plot coverage map, disabled when mapping toolbox is not available-----------------------
+% if(plot_coverage)
+%     
+%     
+%    % latlim=[-22 -18]; lonlim=[-178 -174];
+%      latlim=[min([ray(:,1);ray(:,3)]-1) max([ray(:,1);ray(:,3)])+1]; 
+%      lonlim=[min([ray(:,2);ray(:,4)]-1) max([ray(:,2);ray(:,4)])+1];
+%     figure;hold on
+%     h=worldmap(latlim,lonlim);
+%     %	h=worldmap('world');
+%     
+%     
+%     
+%     for ip=1:length(vpair)
+%         h1=plotm([ray(ip,1) ray(ip,3)],[ray(ip,2) ray(ip,4)],'-ko','linewidth',1,'markerfacecolor','k');
+%     end
+%     set(h1,'markerfacecolor','k')
+%     for ip=1:length(ind_pair)
+%         h2=plotm([ray(ind_pair(ip),1) ray(ind_pair(ip),3)],[ray(ind_pair(ip),2) ray(ind_pair(ip),4)],'-ro','linewidth',1,'markerfacecolor','r');
+%     end
+%     
+%     
+%     l1=legend([h1,h2],'All inter-station raypath','Used raypath');
+%     set(l1,'fontsize',15);
+%     textm(lat1-0.2,lon1-0.7,sta1,'fontsize',15,'color','k');
+%     geoshow(lat1,lon1,'color','b','marker','^','markersize',12,'markerfacecolor','b');
+%     
+%     axesm(gcm,'fontsize',15);
+%     axesm(gcm,'fedgecolor','none');
+% end
 
 if(ifsave)
     save orientation.mat sta1 vpair ray phi_temp phi phi_mean std_mean SNR_R SNR_Z SNR_cutoff C_cutoff vec_C
 end
 
-
+path(path_save);
 cd(dir0)
     % 	end
