@@ -185,7 +185,7 @@ end
 %		end
 %	
 %	end
-	display(['angle between H1 and East is: ', num2str(phi0)]);
+	display(['angle between H1 and North is: ', num2str(phi0)]);
 %	display(['angle determined from T direction is ', num2str(phi1)]);	
 
 	[FR_rz0,FR_tz0] = rotate_vector(FR_1z0,FR_2z0,90-az-phi0);

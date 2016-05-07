@@ -279,7 +279,7 @@ for ip=1:length(vpair)
     
     
     
-    display(['angle between H1 and East is: ', num2str(phi0(ip)),' degrees']);
+    display(['angle between H1 and North is: ', num2str(phi0(ip)),' degrees']);
     %		display(['angle determined from T direction is ', num2str(phi1(ip))]);
     
     %
